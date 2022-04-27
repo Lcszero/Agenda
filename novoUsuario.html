@@ -1,28 +1,115 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="utf-8">
-        <meta name="wiewpoint" content="width=device-with,initial-scale">
-        <title Agenda de contatos ></title>
-        <link href="css/bootstrap.css" rel="stylesheet">
 
-        <style>
-            body {
-                background: url(img/dark-blue-background.jpg) no-repeat center center fixed;
-                background-size: cover;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm"></div>
-                <div class="col-sm-6">
-                    
-                </div>
-                <div class="col-sm"></div>
-                </div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agenda de contatos</title>
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/bootstrap-icons.css">
+
+  <style>
+    html {
+      height: 100%;
+    }
+
+    body {
+      background: url('img/dark-blue-background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      height: 100%;
+      overflow-x: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="h-100 row align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm-10">
+          <div class="card border-primary">
+            <div class="card-header bg-primary text-white">
+              <h5>Cadastro de novo usuário</h5>
             </div>
+            <div class="card-body">
+              <form id="novoUsuario" method="post" action="novoUsuario.php">
+                <input type="hidden" name="acao" value="salvar">
+                <div class="form-group">
+                  <label for="nomeUsuario">Nome</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text"><i class="bi-people-fill"></i></div>
+                    </div>
+                    <input type="text" class="form-control" id="nomeUsuario" name="nomeUsuario"
+                      placeholder="Digite seu nome" value="" required>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm">
+                    <div class="form-group">
+                      <label for="mailUsuario">E-mail</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text"><i class="bi-at"></i></div>
+                        </div>
+                        <input type="email" class="form-control" id="mailUsuario" name="mailUsuario"
+                          placeholder="Digite seu e-mail" value="" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm">
+                    <div class="form-group">
+                      <label for="mail2Usuario">Repita seu e-mail</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text"><i class="bi-at"></i></div>
+                        </div>
+                        <input type="email" class="form-control" id="mail2Usuario" name="mail2Usuario"
+                          placeholder="Repita seu e-mail" value="" required>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm">
+                    <div class="form-group">
+                      <label for="senhaUsuario">Senha</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text"><i class="bi-key-fill"></i></div>
+                        </div>
+                        <input type="password" class="form-control" id="senhaUsuario" name="senhaUsuario"
+                          placeholder="Digite sua senha" value="" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm">
+                    <div class="form-group">
+                      <label for="senha2Usuario">Repita sua senha</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text"><i class="bi-key-fill"></i></div>
+                        </div>
+                        <input type="password" class="form-control" id="senha2Usuario" name="senha2Usuario"
+                          placeholder="Repita sua senha" value="" required>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm text-right">
+                    <button class="btn btn-primary" type="submit">Cadastrar</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-    </body>
+        <div class="col-sm"></div>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>
