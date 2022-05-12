@@ -5,7 +5,10 @@
     <meta charset="utf-8">
     <meta name="wiewpoint" content="width=device-with,initial-scale">
     <title>Agenda de contatos</title>
-    <link href="css/bootstrap.css" rel="stylsheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/jquery.validate.js"></script>
+    <script src="js/messages_pt_BR.js"></script>
 
     <style>
         html {
@@ -35,13 +38,13 @@
                             <form id="login" method="post" action="login.php">
                                 <div class="form-group">
                                     <label for="mailUsuario">E-mail</label>
-                                    <input type="email" class="form-control" id="mailUsuario" 
-                                    name="mailUsuario" placeholder="Digite seu e-mail">
+                                    <input type="email" class="form-control" id="mailUsuario" name="mailUsuario"
+                                        placeholder="Digite seu e-mail" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="senhaUsuario">Senha</label>
-                                    <input type="password" class="form-control" id="senhaUsuario" 
-                                    name="senhaUsuario" placeholder="Digite sua senha">
+                                    <input type="password" class="form-control" id="senhaUsuario" name="senhaUsuario"
+                                        placeholder="Digite sua senha" required>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm">
@@ -52,9 +55,7 @@
                                 </div>
                             </form>
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="container">
+                        <div class="card-footer">
                             <div class="row">
                                 <div class="col-sm">
                                     <a class="btn btn-success btn-block" href="novoUsuario.php">
@@ -76,5 +77,35 @@
     </div>
     </div>
 </body>
+<script>
+    jQuery.validator.setDefaults({
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+        },
 
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        }
+
+    });
+    
+    $(document).ready(function () {
+        $("#login").validate({
+            rules: {
+                mailUsuario: {
+                    required: true,
+                    email: true
+                },
+                senhaUsuario: {
+                    required: true
+                }
+            }
+        });
+    });
+</script>
 </html>
