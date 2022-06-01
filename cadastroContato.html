@@ -10,6 +10,9 @@
   <script src="js/jquery-3.3.1.js"></script>
   <script src="js/bootstrap.bundle.js"></script>
   <script src="js/jquery.mask.js"></script>
+  <script src="js/jquery.validate.js"></script>
+  <script src="js/messages_pt_BR.js"></script>
+  <script src="js/dateITA.js"></script>
 
   <style>
     html {
@@ -84,7 +87,7 @@
               <h5>Cadastro de contato</h5>
             </div>
             <div class="card-body">
-              <form id="novoUsuario" method="post" action="novoUsuario.php">
+              <form id="cadastroContato" method="post" action="main.html">
                 <h5 class="text-primary">Dados pessoais</h5>
                 <hr>
                 <div class="row">
@@ -118,7 +121,7 @@
                                         </div>
                                         <input class="form-control" type="text" 
                                         name="nascimentoContato" id="nascimentoContato" 
-                                        placeholder="Digite a data de nascimento" required>
+                                        placeholder="DD/MM/AAAA">
                                     </div>
                                 </div>
                             </div>
@@ -134,8 +137,7 @@
                                             value="masculino">
                                             <label class="form-check-label" 
                                             for="sexoMasculino">Masculino</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
+                                            &nbsp;
                                             <input class="form-check-input" type="radio" 
                                             name="sexoContato" id="sexoFeminino" 
                                             value="feminino">
@@ -206,7 +208,7 @@
                                                 <i class="bi-phone"></i>
                                             </div>
                                         </div>
-                                        <input class="form-control" type="text" 
+                                        <input class="form-control mascara-telefone" type="text" 
                                         name="telefone1Contato" id="telefone1Contato" 
                                         placeholder="(xx) xxxxx-xxxx" required>
                                     </div>
@@ -223,7 +225,7 @@
                                                 <i class="bi-phone"></i>
                                             </div>
                                         </div>
-                                        <input class="form-control" type="text" 
+                                        <input class="form-control mascara-telefone" type="text" 
                                         name="telefone2Contato" id="telefone2Contato" 
                                         placeholder="(xx) xxxxx-xxxx">
                                     </div>
@@ -242,7 +244,7 @@
                                                 <i class="bi-phone"></i>
                                             </div>
                                         </div>
-                                        <input class="form-control" type="text" 
+                                        <input class="form-control mascara-telefone" type="text" 
                                         name="telefone3Contato" id="telefone3Contato" 
                                         placeholder="(xx) xxxxx-xxxx">
                                     </div>
@@ -259,7 +261,7 @@
                                                 <i class="bi-phone"></i>
                                             </div>
                                         </div>
-                                        <input class="form-control" type="text" 
+                                        <input class="form-control mascara-telefone" type="text" 
                                         name="telefone4Contato" id="telefone4Contato" 
                                         placeholder="(xx) xxxxx-xxxx">
                                     </div>
@@ -284,7 +286,7 @@
                                         </div>
                                         <input class="form-control" type="text" 
                                         name="logradouroContato" id="logradouroContato" 
-                                        placeholder="Runa, avenida, travessa e outros">
+                                        placeholder="Runa, avenida, travessa e outros" required>
                                     </div>
                                 </div>
                             </div>
@@ -322,7 +324,7 @@
                                         </div>
                                         <select class="form-control" name="estadoContato" 
                                         id="estadoContato" required>
-                                            <option>Escolha o estado</option>
+                                            <option value="">Escolha o estado</option>
                                         </select>
                                     </div>
                                 </div>
@@ -359,7 +361,7 @@
                                         </div>
                                         <select class="form-control" name="cidadeContato" 
                                         id="cidadeContato" required>
-                                            <option>Escolha a cidade</option>
+                                            <option value="">Escolha a cidade</option>
                                         </select>
                                     </div>
                                 </div>
@@ -403,11 +405,52 @@
       </div>
     </div>
   </div>
-</body>
-<script>
-    $(document).ready(function() {
-        $("#nascimentoContato").mask("00/00/0000");
+  <script>
+    jQuery.validator.setDefaults({
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+        },
+
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        }
+
     });
+    
+    $(document).ready(function () {
+        $("#cadastroContato").validate({
+            rules: {
+              nomeContato: {
+                  minlength: 5
+              },
+              nascimentoContato: {
+                  dateITA: true
+              },
+              sexoContato: {
+                  required: true
+              }
+            }
+        });
+    });
+
+    $("#nascimentoContato").mask("00/00/0000");
+
+    var SPMaskBehavior = function (val) {
+        return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+    },
+    spOptions = {
+  onKeyPress: function(val, e, field, options) {
+      field.mask(SPMaskBehavior.apply({}, arguments), options);
+    }
+};
+
+$('.mascara-telefone').mask(SPMaskBehavior, spOptions);
 </script>
+</body>
 
 </html>
